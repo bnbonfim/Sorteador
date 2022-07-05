@@ -1,0 +1,33 @@
+import pandas as pd
+import random
+from tkinter import *
+from tkinter import ttk
+import time
+
+def sorteio_insta():#programa de sorteio definido como função
+    #Ler a tabela 
+    tabela = pd.read_excel(r'C:\Users\Coridon\OneDrive\Área de Trabalho\sorteio.xlsx')
+    lista = list(tabela['nomes'])
+    sorteio = random.choice(lista)#sortear um dos nomes
+    time.sleep(5)
+    texto3['text'] = sorteio#edita o texto que aparece quando clico no botão
+    
+janela = Tk()#cria a janela, sempre no inicio
+janela.title('Sorteador')#titulo da janela
+#janela.config(background='cyan') para cores
+janela.geometry('355x350') #pode mudar a janela também
+janela.resizable(False, False)
+
+texto = Label(janela, text='Clique no botão\n para sortear um nome!', font=20, )
+texto.grid(column=0, row=0, padx=(100,0), pady=(0,50))#coloca o texto na janela(grid), altera a posição do texto 
+
+botao = Button(janela, text='Sortear', command=sorteio_insta, font=('Georgia',18), bd=1, anchor=CENTER)
+botao.grid(column=0, row=1, padx=(100,0), pady=(0,50))#espaço entre os textos padx= eixo x, pady= eixo y
+
+texto2 = Label(janela, text='O vencedor é...', font=18, anchor=CENTER)
+texto2.grid(column=0, row=2, padx= (100,0), pady=(0,50))
+
+texto3 = Label(janela, text='', font=(18), highlightthickness=0, anchor=CENTER)
+texto3.grid(column=0, row=3, padx=(100,0), pady=(0,50))
+
+janela.mainloop()#sempre no final, deixa a janela rodando e só fecha se o usuário apertar o X
